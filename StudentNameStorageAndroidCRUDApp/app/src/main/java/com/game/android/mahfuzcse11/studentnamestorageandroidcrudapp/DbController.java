@@ -59,9 +59,7 @@ public class DbController extends SQLiteOpenHelper {
 
         textView.setText("");
         while (cursor.moveToNext()) {
-
-
-            textView.append(cursor.getString(1) + "   " + cursor.getString(2));
+            textView.append(cursor.getString(1) + "   " + cursor.getString(2) + "\n");
         }
 
 
