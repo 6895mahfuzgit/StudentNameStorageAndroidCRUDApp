@@ -7,6 +7,9 @@ import android.os.Bundle;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -14,7 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnStreetViewPanoramaReadyCallback {
 
     private GoogleMap mMap;
 
@@ -23,9 +26,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        StreetViewPanoramaFragment mapFragment = (StreetViewPanoramaFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+
+        mapFragment.getStreetViewPanoramaAsync(this);
+        //  mapFragment.getMapAsync(this);
     }
 
 
@@ -38,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @Override
+    /*@Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
@@ -77,5 +82,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mMap.addMarker(new MarkerOptions().position(latLng));
             }
         });
+    }*/
+    @Override
+    public void onStreetViewPanoramaReady(StreetViewPanorama streetViewPanorama) {
+
+
+        //Dhaka
+
+        streetViewPanorama.setPosition(new LatLng(23.816933, 90.410863));
+        streetViewPanorama.setStreetNamesEnabled(true);
+        streetViewPanorama.setUserNavigationEnabled(true);
+        streetViewPanorama.setZoomGesturesEnabled(true);
+        streetViewPanorama.setZoomGesturesEnabled(true);
+
     }
 }
